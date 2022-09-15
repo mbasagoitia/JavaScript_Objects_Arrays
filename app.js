@@ -106,26 +106,36 @@ console.log(result);
 
 let csvData = "name,age\nFrodo,50\nSam,38\nMerry,36\nPippin,26";
 
-let results = [];
+//I made a test case to see if it still works with a header of more than 2 values
+let csvData2 = "name,age,height\nFrodo,50,3ft\nSam,38,3ft\nMerry,36,3ft";
 
-let dataArray = csvData.split("\n");
-let keysArray = dataArray.shift().split(",");
-let valuesArray = [];
+function parseData (csv) {
+    
+    let results = [];
 
-for (let value of dataArray) {
-    let newArr = [];
-    let newValue = value.split(",");
-    newArr.push(newValue);
-    valuesArray.push(newArr);
-}
+    let dataArray = csv.split("\n");
+    let keysArray = dataArray.shift().split(",");
+    let valuesArray = [];
 
-for (let pair of valuesArray) {
-    let newObj = {};
-    for (let item of pair) {
-        newObj[keysArray[0]] = item[0];
-        newObj[keysArray[1]] = parseInt(item[1]);
-        results.push(newObj);
+    for (let value of dataArray) {
+        let newArr = [];
+        let newValue = value.split(",");
+        newArr.push(newValue);
+        valuesArray.push(newArr);
     }
+
+    for (let pair of valuesArray) {
+        let newObj = {};
+        for (let item of pair) {
+            for (let i = 0; i < keysArray.length; i++) {
+                newObj[keysArray[i]] = item[i];
+            }
+            results.push(newObj);
+        }
+    }
+
+    return results;
+
 }
 
-console.log(results);
+parseData(csvData);
