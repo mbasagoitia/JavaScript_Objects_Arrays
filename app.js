@@ -114,7 +114,7 @@ function parseData (csv) {
     let results = [];
 
     let dataArray = csv.split("\n");
-    let keysArray = dataArray.shift().split(",");
+    let keysArray = dataArray.shift().split(","); 
     let valuesArray = [];
 
     for (let value of dataArray) {
@@ -124,9 +124,9 @@ function parseData (csv) {
         valuesArray.push(newArr);
     }
 
-    for (let pair of valuesArray) {
+    for (let dataSet of valuesArray) {
         let newObj = {};
-        for (let item of pair) {
+        for (let item of dataSet) {
             for (let i = 0; i < keysArray.length; i++) {
                 newObj[keysArray[i]] = item[i];
             }
