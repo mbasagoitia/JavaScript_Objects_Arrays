@@ -14,14 +14,22 @@ function sumArray (array) {
     return sum;
 }
 
-console.log(sumArray(numbers));
-
 //Same solution using reduce
 
 function sumArray2 (array) {
-    let sum = array.reduce(function (acc, num) {
+    let sum = array.reduce((acc, num) => {
         return acc + num;
     }, 0);
+    return sum;
+}
+
+//Same solution using a for loop
+
+function sumArray3 (array) {
+    let sum = 0;
+    for (let i = 0; i < array.length; i++) {
+        sum += array[i];
+    }
     return sum;
 }
 
@@ -61,18 +69,38 @@ let reversedSentence = reversedWordsArray.join(" ");
 
 console.log(reversedSentence);
 
-//using the built-in reverse method
+//using the built-in reverse method (I have this commented out to avoid errors with below solution)
 
-let sentence2 = "The quick brown fox jumps over the lazy dog";
+// let wordArray = sentence.split(" ");
+// let resultArr = [];
+// wordArray.forEach((word) => {
+//     let reversedWord = word.split("").reverse().join("");
+//     resultArr.push(reversedWord);
+// })
+// let result = resultArr.join(" ");
+// console.log(result);
 
-let arrayOfWords2 = sentence2.split(" ");
-let reversedWordsArray2 = [];
+//another try using my own reverse method
 
-for (let word of arrayOfWords2) {
-    reversedWordsArray2.push(word.split("").reverse().join(""));
+function myReverse (array) {
+    //will take an array of split letters ex) ["a", "r", "r", "a", "y"]
+    let reversedArr = [];
+    array.forEach((letter) => {
+        reversedArr.unshift(letter);
+    })
+    let reversedString = reversedArr.join("");
+    return reversedString;
 }
-let reversedSentence2 = reversedWordsArray2.join(" ");
-console.log(reversedSentence2);
+
+let wordArray = sentence.split(" ");
+let resultArr = [];
+wordArray.forEach((word) => {
+    let splitWord = word.split("");
+    let reversedWord = myReverse(splitWord);
+    resultArr.push(reversedWord);
+})
+let result = resultArr.join(" ");
+console.log(result);
 
 //Exercise 4
 
